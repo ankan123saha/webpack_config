@@ -3,4 +3,7 @@ const person={
     lasName: 'saha',
     age: 30
 }
-console.log(person)
+
+const personCopy={...person, city: 'kolkata', age:25}
+
+console.log(personCopy)
