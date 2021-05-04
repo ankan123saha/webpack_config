@@ -1,3 +1,5 @@
+import "./styles/index.scss"
+
 const person={
     firstName: 'ankan',
     lasName: 'saha',

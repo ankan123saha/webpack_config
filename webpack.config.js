@@ -1,11 +1,15 @@
-let mode = "production"
-
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { web } = require("webpack");
+let mode = "development"
+let target="web"
 if(process.env.NODE_ENV==="production"){
     mode = "production";
+    target = "browserslist"
 }
 
 module.exports={
     mode: mode,
+    target:target,
     module:{
      rules:[
          {
@@ -14,11 +18,20 @@ module.exports={
              use:{
                  loader: "babel-loader"
              }
+         },
+         {
+            test: /\.(s[ac]|c)ss$/i,
+            use: [MiniCssExtractPlugin.loader, 
+                   'css-loader',
+                   'postcss-loader',
+                   'sass-loader'],
          }
      ]
     },
+    plugins: [new MiniCssExtractPlugin()],
     devtool:'source-map',
     devServer:{
-      contentBase: './dist'
+      contentBase: './dist',
+      hot: true
     },
 }
